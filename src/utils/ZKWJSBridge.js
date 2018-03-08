@@ -22,7 +22,7 @@ register('pageInit', (options, callback) => {
 window.ZKWJSBridge = ZKWJSBridge;
 
 document.onreadystatechange = function() {
-  if (document.readyState = 'complete') {
+  if (document.readyState === 'complete') {
     const event = new Event('ZKWJSBridgeReady');
     document.dispatchEvent(event);
   }

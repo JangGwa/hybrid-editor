@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import isEmpty from 'ramda/isEmpty'
+// import isEmpty from 'lodash/isEmpty'
+import QuillEditor from './quillEditor/QuillEditor';
 import './App.css';
 
 class App extends Component {
@@ -22,13 +23,14 @@ class App extends Component {
 
 
   render() {
-    const { data } = this.props;
-    if (isEmpty(data)) {
-      return <div id="loading-mask" />;
-    }
+    // data应该是从 App 获取数据的
+    // const { data } = this.props;
+    // if (isEmpty(data)) {
+    //   return <div id="loading-mask" />;
+    // }
     return (
       <div className="App">
-        hybrid
+        <QuillEditor />
       </div>
     );
   }
