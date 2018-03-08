@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import isEmpty from 'lodash/isEmpty'
 import QuillEditor from './quillEditor/QuillEditor';
+import './utils/JSHooks';
 import './App.css';
 
 class App extends Component {
