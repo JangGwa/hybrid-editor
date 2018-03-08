@@ -16,7 +16,11 @@ let editor = null,
 
 class QuillEditor extends Component {
   componentDidMount() {
-    this.updateContent();
+    const { content } = data;
+    editor = new Quill('.quill-editor');
+    editor.clipboard.dangerouslyPasteHTML(content, Quill.sources.SILENT); // 上次编辑的内容添加
+    editor.focus();
+
     this.initJSHooks();
 
     $(document).on('click', '.ql-image', this.handleBrAfterNode);
@@ -32,20 +36,6 @@ class QuillEditor extends Component {
         }
       }
     });
-  }
-
-  /**
-     * 更新编辑器区域内容
-     * @param {Object} data 编辑器内容数据
-     */
-  updateContent() {
-    const { content } = data;
-
-    editor = new Quill('.quill-editor');
-
-    editor.clipboard.dangerouslyPasteHTML(content, Quill.sources.SILENT); // 上次编辑的内容添加
-
-    editor.focus();
   }
 
   initJSHooks() {
