@@ -1,0 +1,139 @@
+* {outline: 0px solid transparent;
+    -webkit-touch-callout: none;
+}
+
+.no {
+    display: none;
+}
+
+img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    opacity:1;
+}
+
+
+blockquote {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+.editor_field p {
+    margin-bottom: 11px;
+    overflow: hidden;
+}
+
+div.editor_field {
+    box-sizing: border-box;
+    clear: both;
+    position: relative;
+    overflow: visible;
+    line-height: 28px;
+    font-size: 16px;
+    text-align: justify;
+}
+
+:focus {
+    outline: 0px solid transparent;
+    text-decoration: none;
+}
+
+div {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+img.emotion-dxmm {
+    width: 48px;
+    height: 48px;
+}
+
+/*附件图片样式*/
+img.app-attachment {
+    width: 11px;
+    height: 14px;
+    padding-top: 4px;
+    margin-right: 6px;
+}
+
+/*链接图片样式*/
+img.dxy-urlicon {
+    width: 11px;
+    height: 10px;
+    padding-top: 6px;
+    margin-left: 2px;
+}
+
+/*链接列表样式*/
+div.attachment-list {
+    margin-top: 23px;
+    /*border: 1px solid rgb(106,76,156);*/
+}
+
+/*placeholder 通用样式*/
+.placeholder[placeholder]:after {
+    content: attr(placeholder);
+    position: absolute;
+    top: 0px;
+    line-height: 28px;
+    color: rgb(204,204,204);
+}
+
+/*标题*/
+#field_title {
+    font-weight: 500;
+    text-align: left;
+    margin-top: 11px;
+    margin-bottom: 11px;
+}
+
+#field_title.info-length:after {
+    content: attr(data-infotext);
+    position: absolute;
+    color: rgb(242,52,38);
+    letter-spacing: -0.4px;
+    font-size: 10px;
+    line-height: 28px;
+    right: 0;
+}
+
+/*提示信息*/
+#replyOwnTopic {
+    position: relative;
+    background-color: rgb(244,244,244);
+    margin-top: 11px;
+    margin-bottom: 11px;
+    color: rgb(136,136,136);
+}
+
+.replyChangeToEditInfo {
+    padding: 12px 54px 12px 15px;
+}
+
+#replyChangeToEditTopic {
+    color: #4868A8;
+}
+
+#closeReplyChangeEditTip {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    margin-top: -12px;
+    right: 15px;
+}
+
+#field_content.info-length:after {
+    content: attr(data-infotext);
+    position: absolute;
+    color: rgb(242,52,38);
+    letter-spacing: -0.4px;
+    font-size: 10px;
+    line-height: 28px;
+    right: 0;
+}
