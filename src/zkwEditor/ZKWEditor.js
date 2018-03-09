@@ -10,7 +10,6 @@ window.onload = function () {
   document.execCommand('styleWithCSS', false, false);
 };
 
-RE.title = document.getElementById('field_title');
 RE.editor = document.getElementById('field_content');
 RE.quote = document.getElementById('field_quote_content');
 RE.replyChangeToEditTopic = document.getElementById('replyChangeToEditTopic');
@@ -18,8 +17,6 @@ RE.closeReplyChangeEditTip = document.getElementById('closeReplyChangeEditTip');
 
 RE.blurTipsOn = document.getElementById('blur_switch').innerHTML == 'yes'
 
-/** @type {Number} 标题最小字数 */
-RE.TITLE_MIN_LENGTH = 4;
 /** @type {Number} 内容最小字数 */
 RE.CONTENT_MIN_LENGTH = 4;
 
@@ -57,28 +54,6 @@ RE.customAction = function (action) {
  */
 document.addEventListener("selectionchange", function () {
   RE.backuprange();
-});
-
-//标题
-RE.title.addEventListener("keydown", function (e) {
-  RE.handleTitleKeyDownEvent(e);
-});
-
-RE.title.addEventListener("input", function (e) {
-  RE.updateTitlePlaceholder();
-  RE.backuprange();
-  RE.callback("inputTitle");
-  RE.removeLengthInfo(e, RE.TITLE_MIN_LENGTH);
-});
-
-RE.title.addEventListener("focus", function () {
-  RE.callback("focusTitle");
-  RE.backuprange();
-});
-
-RE.title.addEventListener("blur", function (e) {
-  RE.checkLength(e, RE.TITLE_MIN_LENGTH);
-  RE.callback("blurFocusTitle");
 });
 
 //正文
@@ -197,15 +172,6 @@ RE.updateHeight = function () {
   RE.callback("updateHeight");
 }
 
-RE.checkTitleEmpty = function () {
-  var html = RE.title.innerHTML;
-  var ret = false;
-  if (html.length == 0 || html == "<br>") {
-    ret = true;
-  }
-  return ret;
-};
-
 RE.checkContentEmpty = function () {
   var html = RE.editor.innerHTML;
   var ret = false;
@@ -244,34 +210,6 @@ RE.restorerange = function () {
   range.setStart(RE.currentSelection.startContainer, RE.currentSelection.startOffset);
   range.setEnd(RE.currentSelection.endContainer, RE.currentSelection.endOffset);
   selection.addRange(range);
-};
-
-RE.focusTitle = function () {
-  var range = document.createRange();
-  range.selectNodeContents(RE.title);
-  range.collapse(false);
-  var selection = window.getSelection();
-  selection.removeAllRanges();
-  selection.addRange(range);
-  RE.title.focus();
-};
-
-RE.focusContent = function () {
-  //防止重复定位导致不能定位到指定位置
-  if (RE.editor == document.activeElement) {
-    return
-  }
-
-  if (RE.currentSelection != null) {
-    RE.restorerange();
-  } else {
-    RE.focusToEnd();
-  }
-};
-
-RE.blurFocus = function () {
-  RE.title.blur();
-  RE.editor.blur();
 };
 
 RE.focusToEnd = function () {
@@ -347,20 +285,6 @@ RE.handleTapEvent = function (e) {
 
 //placeHolder 处理
 
-RE.setTitlePlaceholder = function (body) {
-  RE.title.setAttribute("placeholder", body);
-  RE.updateTitlePlaceholder();
-};
-
-RE.updateTitlePlaceholder = function () {
-  //输入后再删除最后还是会留个<br>
-  if (RE.checkTitleEmpty() == true) {
-    RE.title.classList.add("placeholder");
-  } else {
-    RE.title.classList.remove("placeholder");
-  }
-};
-
 RE.setContentPlaceholder = function (body) {
   RE.editor.setAttribute("placeholder", body);
   RE.updateContentPlaceholder();
@@ -376,24 +300,6 @@ RE.updateContentPlaceholder = function () {
   } else {
     RE.editor.classList.remove("placeholder");
   }
-};
-
-//内容获取与设置
-RE.getTitle = function () {
-  var title = RE.title.innerHTML;
-  if (title.substring(0, 4) == "<br>") {
-    title = title.substring(4, title.length);
-  }
-  title = title.replace('&nbsp;', ' ');
-  title = title.replace('&nbsp', ' ');
-  return title;
-};
-
-RE.getTitleHtmlLength = function () {
-  var title = RE.title.innerHTML;
-  title = title.replace('&nbsp;', ' ');
-  title = title.replace('&nbsp', ' ');
-  return title.length;
 };
 
 RE.getContent = function () {
@@ -435,11 +341,6 @@ RE.insertLocalImage = function (localUrl, remoteUrl, classStr, alt) {
 
 RE.handleContentAreaTapped = function (position) {//外部调用，点击在内容外，不会触发聚焦行为，为防止覆盖默认的点击定位光标行为，导致光标位置不准需要判断
   if (RE.editor == document.activeElement) {
-    return
-  }
-
-  var titleTop = RE.title.getBoundingClientRect().top;
-  if (position < titleTop + 28 + 11) {
     return
   }
 
