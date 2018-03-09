@@ -397,13 +397,6 @@ RE.getTitleHtmlLength = function () {
 };
 
 RE.getContent = function () {
-  var images = document.querySelectorAll("img.DXYEditorNeedReplaceRemoteURL"), index;
-  for (index = 0; index < images.length; ++index) {
-    var image = images[index];
-    image.src = image.getAttribute("remoteSrc");
-    image.classList.remove("DXYEditorNeedReplaceRemoteURL");
-    image.removeAttribute("remoteSrc");
-  }
   var body = RE.editor.innerHTML;
 
   //去掉最开头的<br> ,body.startsWith("<br>") iOS8下解析不过
@@ -434,7 +427,6 @@ RE.insertLocalImage = function (localUrl, remoteUrl, classStr, alt) {
   var img = document.createElement('img');
   img.setAttribute("src", localUrl);
   img.setAttribute("remoteSrc", remoteUrl);
-  img.setAttribute("class", classStr + " DXYEditorNeedReplaceRemoteURL");
   img.setAttribute("alt", alt);
   img.onload = RE.updateHeight;
 
@@ -550,7 +542,6 @@ RE.backSpaceLocate = function (destNode) {
 };
 
 
-//------下面时暂时没有用到的函数------
 RE.setBlockquote = function () {
   document.execCommand('formatBlock', false, '<blockquote>');
 };
