@@ -252,12 +252,6 @@ RE.removeLengthInfo = function (e, minLength) {
 /*
     事件响应函数
  */
-RE.handleTitleKeyDownEvent = function (e) {
-  if (e.keyCode == 13) {
-    e.preventDefault();
-  }
-};
-
 RE.closeReplyChangeEditTip = function (e) {
   document.getElementById('replyOwnTopic').remove();
 };
