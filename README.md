@@ -1,2 +1,1 @@
-# janggwaEditor
-hybrid 编辑器实现
+# hybrid 环境搭建及富文本编辑器实现
